@@ -1,7 +1,5 @@
-package com.galuszkat.hexagonal.architecture.products.adapter.`in`.web.controller
+package com.galuszkat.hexagonal.architecture.products.adapter.`in`.web
 
-import com.galuszkat.hexagonal.architecture.products.adapter.`in`.web.model.ProductRequest
-import com.galuszkat.hexagonal.architecture.products.adapter.`in`.web.model.ProductResponse
 import com.galuszkat.hexagonal.architecture.products.domain.ProductService
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.PostMapping

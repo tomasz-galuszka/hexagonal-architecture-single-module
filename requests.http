@@ -1,3 +1,15 @@
+### CREATE BASKET
+POST http://localhost:8080/baskets
+Accept: application/json
+
+### FIND BASKET
+GET http://localhost:8080/baskets/b9d1896b-99e1-4bd0-969f-01f27bf0a9f3
+Accept: application/json
+
+### DELETE BASKET
+DELETE http://localhost:8080/baskets/b9d1896b-99e1-4bd0-969f-01f27bf0a9f3
+Accept: application/json
+
 ### CREATE PRODUCT
 POST http://localhost:8080/products
 Content-Type: application/json
@@ -9,18 +21,10 @@ Content-Type: application/json
   "priceCurrency": "PLN"
 }
 
-### CREATE EMPTY BASKET
-POST http://localhost:8080/baskets
-Accept: application/json
-
-### FIND BASKET
-GET http://localhost:8080/baskets/efa8db22-7b74-4da2-84c0-34866d3e8cbc
-Accept: application/json
-
 ### ADD PRODUCT
-PUT http://localhost:8080/baskets/efa8db22-7b74-4da2-84c0-34866d3e8cbc/add/57fb86b8-4c86-45a3-be64-7b3ad3b208d6
+PUT http://localhost:8080/baskets/b9d1896b-99e1-4bd0-969f-01f27bf0a9f3/add/e9898e20-a473-4898-ade6-d75bdf7b7c04
 Accept: application/json
 
 ### REMOVE PRODUCT
-DELETE http://localhost:8080/baskets/efa8db22-7b74-4da2-84c0-34866d3e8cbc/remove/a0352dec-d18a-4865-92a2-1452d3e6532a
+DELETE http://localhost:8080/baskets/b9d1896b-99e1-4bd0-969f-01f27bf0a9f3/remove/e9898e20-a473-4898-ade6-d75bdf7b7c04
 Accept: application/json

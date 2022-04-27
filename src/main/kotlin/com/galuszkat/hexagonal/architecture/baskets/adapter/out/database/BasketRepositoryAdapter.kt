@@ -36,4 +36,12 @@ class BasketRepositoryAdapter : BasketRepositoryPort {
       logger.info { "Updated entity: $it" }
     }
   }
+
+  override fun delete(basket: Basket) {
+    logger.info { "Deleting entity: $basket" }
+
+    storage.remove(basket.id).also {
+      logger.info { "Deleted entity: $it" }
+    }
+  }
 }

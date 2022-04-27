@@ -1,6 +1,5 @@
-package com.galuszkat.hexagonal.architecture.baskets.adapter.`in`.web.controller
+package com.galuszkat.hexagonal.architecture.baskets.adapter.`in`.web
 
-import com.galuszkat.hexagonal.architecture.baskets.adapter.`in`.web.BasketResponse
 import com.galuszkat.hexagonal.architecture.baskets.domain.BasketService
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -35,6 +34,12 @@ class BasketController(
     return basketService.find(id)
       .let { BasketResponse.from(it) }
       .also { logger.info { "Response: $it" } }
+  }
+
+  @DeleteMapping("/{id}")
+  fun delete(@PathVariable id: String) {
+    logger.info { "Request: $id" }
+    return basketService.delete(id)
   }
 
   @DeleteMapping("/{id}/remove/{productId}")

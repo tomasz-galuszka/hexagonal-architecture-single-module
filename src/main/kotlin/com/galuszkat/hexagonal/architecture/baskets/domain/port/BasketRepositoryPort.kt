@@ -9,4 +9,5 @@ interface BasketRepositoryPort {
   fun findById(id: String): Basket?
 
   fun update(basket: Basket)
+  fun delete(basket: Basket)
 }

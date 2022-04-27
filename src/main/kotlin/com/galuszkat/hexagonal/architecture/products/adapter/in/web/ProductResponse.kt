@@ -1,4 +1,4 @@
-package com.galuszkat.hexagonal.architecture.products.adapter.`in`.web.model
+package com.galuszkat.hexagonal.architecture.products.adapter.`in`.web
 
 import com.galuszkat.hexagonal.architecture.products.domain.model.Product
 import java.math.BigDecimal

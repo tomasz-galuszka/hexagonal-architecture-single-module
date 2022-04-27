@@ -11,15 +11,21 @@ private val logger = KotlinLogging.logger {}
 class BasketMessageBrokerAdapter: BasketMessageBrokerPort {
 
   override fun publishCreated(basket: Basket) {
-    logger.info { "Publishing event: $basket" }
+    logger.info { "Publishing create event: $basket" }
 
-    logger.info { "Published event: $basket" }
+    logger.info { "Published create event: $basket" }
   }
 
   override fun publishUpdated(basket: Basket) {
-    logger.info { "Publishing event: $basket" }
+    logger.info { "Publishing update event: $basket" }
 
-    logger.info { "Published event: $basket" }
+    logger.info { "Published update event: $basket" }
+  }
+
+  override fun publishDeleted(basket: Basket) {
+    logger.info { "Publishing delete event: $basket" }
+
+    logger.info { "Published delete event: $basket" }
   }
 
 }

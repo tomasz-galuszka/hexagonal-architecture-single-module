@@ -27,6 +27,16 @@ class BasketService(
     return domain
   }
 
+  fun delete(id: String) {
+    logger.info { "Deleting basket for id: $id" }
+
+    val basket = find(id)
+    repository.delete(basket)
+    messageBroker.publishDeleted(basket)
+
+    logger.info { "Deleted: $basket" }
+  }
+
   fun find(id: String): Basket {
     logger.info { "Finding by id : $id" }
 

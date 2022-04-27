@@ -7,4 +7,5 @@ interface BasketMessageBrokerPort {
   fun publishCreated(basket: Basket)
 
   fun publishUpdated(basket: Basket)
+  fun publishDeleted(basket: Basket)
 }
