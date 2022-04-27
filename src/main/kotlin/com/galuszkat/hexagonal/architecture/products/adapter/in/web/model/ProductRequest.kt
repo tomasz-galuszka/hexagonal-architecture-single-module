@@ -2,9 +2,9 @@ package com.galuszkat.hexagonal.architecture.products.adapter.`in`.web.model
 
 import com.galuszkat.hexagonal.architecture.products.domain.model.Product
 import java.math.BigDecimal
+import java.util.UUID
 
 data class ProductRequest(
-  private val id: String,
   private val name: String,
   private val stock: Int,
   private val priceAmount: BigDecimal,
@@ -13,7 +13,7 @@ data class ProductRequest(
 
   fun asProduct(): Product {
     return Product(
-      id,
+      id = UUID.randomUUID().toString(),
       name,
       stock,
       priceAmount,

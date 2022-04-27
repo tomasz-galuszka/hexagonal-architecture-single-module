@@ -1,0 +1,26 @@
+### CREATE PRODUCT
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "{{$uuid}}",
+  "stock": {{$randomInt}},
+  "priceAmount": 36.99,
+  "priceCurrency": "PLN"
+}
+
+### CREATE EMPTY BASKET
+POST http://localhost:8080/baskets
+Accept: application/json
+
+### FIND BASKET
+GET http://localhost:8080/baskets/efa8db22-7b74-4da2-84c0-34866d3e8cbc
+Accept: application/json
+
+### ADD PRODUCT
+PUT http://localhost:8080/baskets/efa8db22-7b74-4da2-84c0-34866d3e8cbc/add/57fb86b8-4c86-45a3-be64-7b3ad3b208d6
+Accept: application/json
+
+### REMOVE PRODUCT
+DELETE http://localhost:8080/baskets/efa8db22-7b74-4da2-84c0-34866d3e8cbc/remove/a0352dec-d18a-4865-92a2-1452d3e6532a
+Accept: application/json

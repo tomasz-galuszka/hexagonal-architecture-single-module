@@ -10,9 +10,23 @@ private val logger = KotlinLogging.logger {}
 @Component
 class ProductRepositoryAdapter : ProductRepositoryPort {
 
-  override fun store(product: Product) {
+  private val storage = HashMap<String, Product>()
+
+  override fun store(product: Product): Product {
     logger.info { "Storing entity: $product" }
 
-    logger.info { "Stored entity: $product" }
+    storage[product.id] = product
+
+    return storage[product.id]!!.also {
+      logger.info { "Stored entity: $it" }
+    }
+  }
+
+  override fun findById(id: String): Product? {
+    logger.info { "Finding entity for: $id" }
+
+    return storage[id].also {
+      logger.info { "Found entity for: $id" }
+    }
   }
 }

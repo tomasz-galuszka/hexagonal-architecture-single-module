@@ -10,17 +10,28 @@ private val logger = KotlinLogging.logger {}
 
 @Component
 class ProductService(
-  private val productRepository: ProductRepositoryPort,
+  private val repository: ProductRepositoryPort,
   private val messageBroker: ProductMessageBrokerPort,
 ) {
 
   fun create(domain: Product): Product {
     logger.info { "Creating domain: $domain" }
 
-    productRepository.store(domain)
+    repository.store(domain)
     messageBroker.publishCreated(domain)
 
-    logger.info { "Created domain: $domain" }
-    return domain
+    return domain.also {
+      logger.info { "Created domain: $it" }
+    }
+  }
+
+  fun find(id: String): Product {
+    logger.info { "Finding for id : $id" }
+
+    val product = repository.findById(id) ?: throw RuntimeException("not found for id: $id")
+
+    return product.also {
+      logger.info { "Found for id : $id = $it" }
+    }
   }
 }
