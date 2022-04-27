@@ -1,5 +1,5 @@
 server.port: 8080
-spring:
-  data:
-    mongodb:
-      uri: ${DATABASE_PROTOCOL:mongodb}://${DATABASE_USER:blog_user}:${DATABASE_PASSWORD:blog_pass}@${DATABASE_HOST:localhost}/${DATABASE_NAME:blog}?retryWrites=true&w=majority
+#spring:
+#  data:
+#    mongodb:
+#      uri: ${DATABASE_PROTOCOL:mongodb}://${DATABASE_USER:blog_user}:${DATABASE_PASSWORD:blog_pass}@${DATABASE_HOST:localhost}/${DATABASE_NAME:blog}?retryWrites=true&w=majority
