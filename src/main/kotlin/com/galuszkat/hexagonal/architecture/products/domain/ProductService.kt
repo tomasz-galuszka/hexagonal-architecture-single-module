@@ -14,14 +14,13 @@ class ProductService(
   private val messageBroker: ProductMessageBrokerPort,
 ) {
 
-  fun create(product: Product): Product {
-    logger.info { "Creating product: $product" }
+  fun create(domain: Product): Product {
+    logger.info { "Creating domain: $domain" }
 
-    productRepository.store(product)
-    messageBroker.publishCreated(product)
+    productRepository.store(domain)
+    messageBroker.publishCreated(domain)
 
-    logger.info { "Created product: $product" }
-
-    return product
+    logger.info { "Created domain: $domain" }
+    return domain
   }
 }

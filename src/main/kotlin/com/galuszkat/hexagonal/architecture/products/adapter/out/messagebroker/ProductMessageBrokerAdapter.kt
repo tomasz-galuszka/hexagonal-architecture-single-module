@@ -11,9 +11,9 @@ private val logger = KotlinLogging.logger {}
 class ProductMessageBrokerAdapter: ProductMessageBrokerPort {
 
   override fun publishCreated(product: Product) {
-    logger.info { "Publishing product: $product" }
+    logger.info { "Publishing event: $product" }
 
-    logger.info { "Published product: $product" }
+    logger.info { "Published event: $product" }
   }
 
 }

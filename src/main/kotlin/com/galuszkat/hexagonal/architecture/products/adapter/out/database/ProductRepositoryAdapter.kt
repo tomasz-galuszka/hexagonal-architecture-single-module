@@ -11,8 +11,8 @@ private val logger = KotlinLogging.logger {}
 class ProductRepositoryAdapter : ProductRepositoryPort {
 
   override fun store(product: Product) {
-    logger.info { "Storing product: $product" }
+    logger.info { "Storing entity: $product" }
 
-    logger.info { "Stored product: $product" }
+    logger.info { "Stored entity: $product" }
   }
 }
