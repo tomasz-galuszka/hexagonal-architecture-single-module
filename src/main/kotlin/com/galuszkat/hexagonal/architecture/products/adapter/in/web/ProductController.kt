@@ -1,6 +1,6 @@
 package com.galuszkat.hexagonal.architecture.products.adapter.`in`.web
 
-import com.galuszkat.hexagonal.architecture.products.domain.ProductService
+import com.galuszkat.hexagonal.architecture.products.domain.api.ProductApi
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -12,7 +12,7 @@ private val logger = KotlinLogging.logger {}
 @RestController
 @RequestMapping("products")
 class ProductController(
-  private val productService: ProductService
+  private val productApi: ProductApi
 ) {
 
   @PostMapping
@@ -20,7 +20,7 @@ class ProductController(
     logger.info { "Request: $request" }
     val domain = request.asProduct()
 
-    val createdProduct = productService.create(domain)
+    val createdProduct = productApi.create(domain)
     val response = ProductResponse.from(createdProduct)
 
     logger.info { "Response: $response" }

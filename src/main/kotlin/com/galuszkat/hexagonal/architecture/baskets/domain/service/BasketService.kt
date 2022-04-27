@@ -1,9 +1,10 @@
-package com.galuszkat.hexagonal.architecture.baskets.domain
+package com.galuszkat.hexagonal.architecture.baskets.domain.service
 
+import com.galuszkat.hexagonal.architecture.baskets.domain.api.BasketApi
 import com.galuszkat.hexagonal.architecture.baskets.domain.model.Basket
 import com.galuszkat.hexagonal.architecture.baskets.domain.port.BasketMessageBrokerPort
 import com.galuszkat.hexagonal.architecture.baskets.domain.port.BasketRepositoryPort
-import com.galuszkat.hexagonal.architecture.products.domain.ProductService
+import com.galuszkat.hexagonal.architecture.products.domain.api.ProductApi
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 
@@ -13,10 +14,10 @@ private val logger = KotlinLogging.logger {}
 class BasketService(
   private val repository: BasketRepositoryPort,
   private val messageBroker: BasketMessageBrokerPort,
-  private val productService: ProductService,
-) {
+  private val productApi: ProductApi,
+) : BasketApi {
 
-  fun create(): Basket {
+  override fun create(): Basket {
     logger.info { "Creating empty basket..." }
     val domain = Basket.new()
 
@@ -27,7 +28,7 @@ class BasketService(
     return domain
   }
 
-  fun delete(id: String) {
+  override fun delete(id: String) {
     logger.info { "Deleting basket for id: $id" }
 
     val basket = find(id)
@@ -37,7 +38,7 @@ class BasketService(
     logger.info { "Deleted: $basket" }
   }
 
-  fun find(id: String): Basket {
+  override fun find(id: String): Basket {
     logger.info { "Finding by id : $id" }
 
     val basket = repository.findById(id) ?: throw RuntimeException("not found for id: $id")
@@ -47,12 +48,12 @@ class BasketService(
     }
   }
 
-  fun addProduct(id: String, productId: String): Basket {
+  override fun addProduct(id: String, productId: String): Basket {
     logger.info { "Adding for : $id and productId: $productId" }
 
     val basket: Basket = find(id)
     val newBasket = basket.copy(
-      productList = basket.productList + productService.find(productId)
+      productList = basket.productList + productApi.find(productId)
     )
 
     repository.update(newBasket)
@@ -63,7 +64,7 @@ class BasketService(
     }
   }
 
-  fun removeProduct(id: String, productId: String): Basket {
+  override fun removeProduct(id: String, productId: String): Basket {
     logger.info { "Removing for : $id and productId: $productId" }
 
     val basket: Basket = find(id)

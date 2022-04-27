@@ -1,6 +1,6 @@
 package com.galuszkat.hexagonal.architecture.baskets.adapter.`in`.web
 
-import com.galuszkat.hexagonal.architecture.baskets.domain.BasketService
+import com.galuszkat.hexagonal.architecture.baskets.domain.api.BasketApi
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,14 +15,14 @@ private val logger = KotlinLogging.logger {}
 @RestController
 @RequestMapping("baskets")
 class BasketController(
-  private val basketService: BasketService
+  private val basketApi: BasketApi
 ) {
 
   @PostMapping
   fun create(): BasketResponse {
     logger.info { "Request empty" }
 
-    return basketService.create()
+    return basketApi.create()
       .let { BasketResponse.from(it) }
       .also { logger.info { "Response: $it" } }
   }
@@ -31,7 +31,7 @@ class BasketController(
   fun find(@PathVariable id: String): BasketResponse {
     logger.info { "Request: $id" }
 
-    return basketService.find(id)
+    return basketApi.find(id)
       .let { BasketResponse.from(it) }
       .also { logger.info { "Response: $it" } }
   }
@@ -39,14 +39,14 @@ class BasketController(
   @DeleteMapping("/{id}")
   fun delete(@PathVariable id: String) {
     logger.info { "Request: $id" }
-    return basketService.delete(id)
+    return basketApi.delete(id)
   }
 
   @DeleteMapping("/{id}/remove/{productId}")
   fun removeProduct(@PathVariable id: String, @PathVariable productId: String): BasketResponse {
     logger.info { "Request: $id and $productId" }
 
-    return basketService.removeProduct(id, productId)
+    return basketApi.removeProduct(id, productId)
       .let { BasketResponse.from(it) }
       .also { logger.info { "Response: $it" } }
   }
@@ -55,7 +55,7 @@ class BasketController(
   fun addProduct(@PathVariable id: String, @PathVariable productId: String): BasketResponse {
     logger.info { "Request: $id and $productId" }
 
-    return basketService.addProduct(id, productId)
+    return basketApi.addProduct(id, productId)
       .let { BasketResponse.from(it) }
       .also { logger.info { "Response: $it" } }
   }

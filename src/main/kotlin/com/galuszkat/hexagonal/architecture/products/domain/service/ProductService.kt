@@ -1,5 +1,6 @@
-package com.galuszkat.hexagonal.architecture.products.domain
+package com.galuszkat.hexagonal.architecture.products.domain.service
 
+import com.galuszkat.hexagonal.architecture.products.domain.api.ProductApi
 import com.galuszkat.hexagonal.architecture.products.domain.model.Product
 import com.galuszkat.hexagonal.architecture.products.domain.port.ProductMessageBrokerPort
 import com.galuszkat.hexagonal.architecture.products.domain.port.ProductRepositoryPort
@@ -12,9 +13,9 @@ private val logger = KotlinLogging.logger {}
 class ProductService(
   private val repository: ProductRepositoryPort,
   private val messageBroker: ProductMessageBrokerPort,
-) {
+) : ProductApi {
 
-  fun create(domain: Product): Product {
+  override fun create(domain: Product): Product {
     logger.info { "Creating domain: $domain" }
 
     repository.store(domain)
@@ -25,7 +26,7 @@ class ProductService(
     }
   }
 
-  fun find(id: String): Product {
+  override fun find(id: String): Product {
     logger.info { "Finding for id : $id" }
 
     val product = repository.findById(id) ?: throw RuntimeException("not found for id: $id")
